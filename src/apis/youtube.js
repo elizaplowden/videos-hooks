@@ -8,6 +8,7 @@ export default axios.create({
   // all the query string params we want added onto request
   params: {
     part: 'snippet',
+    type: 'video',
     maxResults: 5,
     key: KEY,
   }
