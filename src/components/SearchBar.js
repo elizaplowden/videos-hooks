@@ -1,34 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class SearchBar extends React.Component {
-  state = { term: ''};
+// function component - hook style
+const SearchBar = ({ onFormSubmit }) => {
+  // declare term that's used on line 9
+  const [term, setTerm] = useState('');
 
-  onInputChange = event => {
-    this.setState({ term: event.target.value });
+  // event handlers need to be defined as variables if outside of class / inside function instead
+  const onInputChange = event => {
+    // to update state in a funtion component, you can't use this and setState
+    // we have to use setter we got when we initialised a piece of state with useState hook
+    setTerm(event.target.value);
   };
 
-  onFormSubmit = event => {
+  const onSubmit = event => {
     // prevents it automatically submittting
     event.preventDefault();
-    //  TODO: Make sure we call callback from parent component
-    this.props.onFormSubmit(this.state.term);
-  }
+    // prop
+    onFormSubmit(term);
+  };
+  return (
+    <div className="search-bar ui segment">
+      <form onSubmit={onSubmit} className="ui form">
+        <div className="field">
+          <label>Video Search</label>
+          <input
+            type="text"
+            value={term}
+            onChange={onInputChange}
+          />
+        </div>
+      </form>
+    </div>
+  );
+};
+
+class SearchBar extends React.Component {
+  // old way of setting state
+  // state = { term: ''};
+
+
 
   render() {
-    return (
-      <div className="search-bar ui segment">
-        <form onSubmit={this.onFormSubmit} className="ui form">
-          <div className="field">
-            <label>Video Search</label>
-            <input
-              type="text"
-              value={this.state.term}
-              onChange={this.onInputChange}
-            />
-          </div>
-        </form>
-      </div>
-    );
+
   }
 }
 
