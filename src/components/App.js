@@ -12,26 +12,24 @@ const App = () => {
     onTermSubmit('flowers');
     // empty array means 'run this function only once'
   }, []);
-};
 
-class App extends React.Component {
-
-  }
-
-  onTermSubmit = async (term) => {
-    const response = await  youtube.get('/search', {
+  const onTermSubmit = async (term) => {
+    const response = await youtube.get('/search', {
       params: {
         q: term
       }
     });
 
+  // two separate set state functino calls
+  setVideos(response.data.items);
+  setSelectedVideo(response.data.items[0]);
 
-  this.setState({
-    videos: response.data.items,
-    // first item will be default video
-    selectedVideo: response.data.items[0]
-    });
   };
+};
+
+class App extends React.Component {
+
+  }
 
   onVideoSelect = video => {
     this.setState({ selectedVideo: video });
