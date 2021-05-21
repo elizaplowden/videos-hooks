@@ -26,7 +26,7 @@ const App = () => {
 
   };
 
-  onVideoSelect = video => {
+  const onVideoSelect = (video) => {
     setSelectedVideo(video);
   };
 
