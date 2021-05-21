@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBar from './SearchBar';
 import youtube from '../apis/youtube';
 import VideoList from './VideoList';
 import VideoDetail from './VideoDetail';
 
-class App extends React.Component {
-  state = { videos: [], selectedVideo: null };
+const App = () => {
+  const [videos, setVideos] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
-  componentDidMount() {
-    // default search when app first loads
-    this.onTermSubmit('flowers')
+  useEffect(() => {
+    onTermSubmit('flowers');
+    // empty array means 'run this function only once'
+  }, []);
+};
+
+class App extends React.Component {
+
   }
 
   onTermSubmit = async (term) => {
