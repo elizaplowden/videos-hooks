@@ -5,30 +5,10 @@ import VideoList from './VideoList';
 import VideoDetail from './VideoDetail';
 
 const App = () => {
-  const [videos, setVideos] = useState([]);
+
   const [selectedVideo, setSelectedVideo] = useState(null);
 
-  useEffect(() => {
-    onTermSubmit('flowers');
-    // empty array means 'run this function only once'
-  }, []);
-
-  const onTermSubmit = async (term) => {
-    const response = await youtube.get('/search', {
-      params: {
-        q: term
-      }
-    });
-
-  // two separate set state function calls
-  setVideos(response.data.items);
-  setSelectedVideo(response.data.items[0]);
-
-  };
-
-  const onVideoSelect = (video) => {
-    setSelectedVideo(video);
-  };
+  // setSelectedVideo(response.data.items[0]);
 
   return (
       <div className="ui container">
@@ -40,7 +20,9 @@ const App = () => {
             </div>
             <div className="five wide column">
                 <VideoList
-                onVideoSelect={onVideoSelect}
+                // replace onVideoSelect fucntion
+                // can use an arrow function or just call like this
+                onVideoSelect={setSelectedVideo}
                 videos={videos}
                 />
             </div>

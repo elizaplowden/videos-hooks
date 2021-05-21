@@ -32,7 +32,6 @@ const SearchBar = ({ onFormSubmit }) => {
         </div>
       </form>
     </div>
-    // hi
   );
 };
 
