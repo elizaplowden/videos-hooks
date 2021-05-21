@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import youtube from '../apis/youtube';
 
-
-const useVideos = () => {
+// can now use this in any component
+// as long as we provide a default search term, we will get a list of videos and a search function
+const useVideos = (defaultSearchTerm) => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    onTermSubmit('flowers');
+    search(defaultSearchTerm);
   // empty array means 'run this function only once'
   }, []);
 
-  const onTermSubmit = async (term) => {
+
+  const search = async (term) => {
     const response = await youtube.get('/search', {
       params: {
         q: term
@@ -22,6 +24,8 @@ const useVideos = () => {
 
 
   };
+  // either use react convention [] or JS object convention
+  return { videos, search };
 };
 
 export default useVideos;
