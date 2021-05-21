@@ -25,7 +25,7 @@ const useVideos = (defaultSearchTerm) => {
 
   };
   // either use react convention [] or JS object convention
-  return { videos, search };
+  return [videos, search];
 };
 
 export default useVideos;
